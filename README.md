@@ -20,5 +20,4 @@ docker compose -f .\docker-compose.dev.yml up
 docker compose -f .\docker-compose.prod.yml up
 ```
 
--
 - Bundled App will be available on port `8080`
