@@ -13,14 +13,14 @@ const val GAME_ENDPOINT: String = "/ws"
 @Configuration
 @EnableWebSocket
 class WSConfig : WebSocketConfigurer {
-	override fun registerWebSocketHandlers(registry: WebSocketHandlerRegistry) {
-		registry.addHandler(GameController(), GAME_ENDPOINT).withSockJS()
-	}
+    override fun registerWebSocketHandlers(registry: WebSocketHandlerRegistry) {
+        registry.addHandler(GameController(), GAME_ENDPOINT).setAllowedOriginPatterns("*").withSockJS()
+    }
 }
 
 @SpringBootApplication
 class RushbApplication
 
 fun main(args: Array<String>) {
-	runApplication<RushbApplication>(*args)
+    runApplication<RushbApplication>(*args)
 }
