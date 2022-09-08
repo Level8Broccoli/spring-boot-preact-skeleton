@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "preact": "^10.10.6"
+    "@types/sockjs-client": "^1.5.1",
+    "preact": "^10.10.6",
+    "sockjs-client": "^1.6.1"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.3.0",
