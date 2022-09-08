@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  rushb:
+    container_name: rushb
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "8080:8080"

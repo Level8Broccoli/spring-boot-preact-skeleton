@@ -1,0 +1,27 @@
+FROM amazoncorretto:11-alpine as backend_build
+WORKDIR /workspace/app
+
+COPY ./backend/mvnw .
+COPY ./backend/.mvn .mvn
+COPY ./backend/pom.xml .
+COPY ./backend/src src
+
+RUN ./mvnw install -DskipTests
+RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+
+FROM node:18-alpine as frontend_build
+WORKDIR /workspace/app
+COPY ./frontend/package.json .
+COPY ./frontend/package-lock.json .
+RUN npm install
+COPY ./frontend/ .
+RUN npm run build
+
+FROM amazoncorretto:11-alpine
+VOLUME /tmp
+ARG DEPENDENCY=/workspace/app/target/dependency
+COPY --from=backend_build ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY --from=backend_build ${DEPENDENCY}/META-INF /app/META-INF
+COPY --from=backend_build ${DEPENDENCY}/BOOT-INF/classes /app
+COPY --from=frontend_build /workspace/app/dist /public
+ENTRYPOINT ["java","-cp","app:app/lib/*","ch.ffhs.rushb.RushbApplicationKt"]
