@@ -33,4 +33,6 @@ COPY --from=backend_build ${DEPENDENCY}/META-INF ${DIRPATH}META-INF
 COPY --from=backend_build ${DEPENDENCY}/BOOT-INF/classes ${DIRPATH}
 COPY --from=frontend_build ${DIRPATH}dist /public
 
+EXPOSE 8080
+
 ENTRYPOINT ["java","-cp","app:app/lib/*","ch.ffhs.rushb.RushbApplicationKt"]
