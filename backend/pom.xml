@@ -14,8 +14,8 @@
 	<name>rushb</name>
 	<description>FFHS GameDev Modul</description>
 	<properties>
-		<java.version>11</java.version>
-		<kotlin.version>1.6.21</kotlin.version>
+		<java.version>17</java.version>
+    <kotlin.version>1.6.21</kotlin.version>
 	</properties>
 	<dependencies>
 		<dependency>
